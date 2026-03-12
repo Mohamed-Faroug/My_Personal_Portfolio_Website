@@ -1,0 +1,2843 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohamed Faroug | L2/L3 Network Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=IBM+Plex+Sans+Arabic:wght@300;400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0F172A;
+  --navy2: #1E293B;
+  --navy3: #263354;
+  --blue: #2563EB;
+  --blue-light: #3B82F6;
+  --blue-glow: rgba(37,99,235,0.3);
+  --green: #10B981;
+  --gray-light: #F1F5F9;
+  --gray-mid: #94A3B8;
+  --gray-dark: #475569;
+  --white: #FFFFFF;
+  --text-main: #E2E8F0;
+  --text-muted: #94A3B8;
+  --border: rgba(37,99,235,0.2);
+  --card-bg: rgba(30,41,59,0.8);
+  --font-ar: 'Cairo', sans-serif;
+  --font-en: 'Poppins', sans-serif;
+  --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--text-main);
+  font-family: var(--font-ar);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+body.ltr {
+  direction: ltr;
+  font-family: var(--font-en);
+}
+
+/* ===== ANIMATED BACKGROUND ===== */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+}
+
+.bg-orb1 {
+  position: fixed;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%);
+  top: -200px; right: -200px;
+  pointer-events: none;
+  z-index: 0;
+  animation: orbFloat 8s ease-in-out infinite;
+}
+
+.bg-orb2 {
+  position: fixed;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 70%);
+  bottom: -100px; left: -100px;
+  pointer-events: none;
+  z-index: 0;
+  animation: orbFloat 10s ease-in-out infinite reverse;
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-30px); }
+}
+
+/* ===== NAV ===== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(15,23,42,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 1px;
+}
+
+.nav-logo span { color: var(--blue); }
+
+.nav-links {
+  display: flex;
+  gap: 0.5rem;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: var(--white);
+  background: rgba(37,99,235,0.15);
+}
+
+.nav-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.lang-toggle {
+  background: rgba(37,99,235,0.15);
+  border: 1px solid var(--border);
+  color: var(--blue-light);
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.lang-toggle:hover { background: rgba(37,99,235,0.3); }
+
+.theme-toggle {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.theme-toggle:hover { color: var(--white); background: rgba(255,255,255,0.05); }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.hamburger span {
+  width: 24px; height: 2px;
+  background: var(--text-main);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+/* ===== PAGES ===== */
+.page {
+  display: none;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+  padding-top: 70px;
+}
+
+.page.active { display: block; }
+
+/* ===== HOME PAGE ===== */
+.hero {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  width: 100%;
+}
+
+.hero-text { order: 1; }
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(16,185,129,0.1);
+  border: 1px solid rgba(16,185,129,0.3);
+  color: var(--green);
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  animation: pulse 2s infinite;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.hero-title {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: var(--white);
+}
+
+.hero-title .highlight {
+  color: var(--blue-light);
+  position: relative;
+}
+
+.hero-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  max-width: 500px;
+  font-family: var(--font-en);
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-num {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--blue-light);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--blue);
+  color: white;
+  border: none;
+  padding: 0.85rem 2rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: var(--font-en);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 20px rgba(37,99,235,0.4);
+}
+
+.btn-primary:hover {
+  background: var(--blue-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(37,99,235,0.5);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  padding: 0.85rem 2rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: var(--font-en);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-outline:hover {
+  border-color: var(--blue);
+  color: var(--blue-light);
+  background: rgba(37,99,235,0.05);
+}
+
+/* Hero Image */
+.hero-image { order: 2; display: flex; justify-content: center; }
+
+.profile-frame {
+  position: relative;
+  width: 380px;
+  height: 420px;
+}
+
+.profile-frame::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, var(--blue), transparent, var(--green));
+  z-index: 0;
+}
+
+.profile-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  background: var(--navy2);
+  z-index: 0;
+}
+
+.profile-img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 22px;
+  filter: contrast(1.05) brightness(0.92);
+}
+
+.profile-card {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  background: var(--navy2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  z-index: 2;
+  backdrop-filter: blur(10px);
+  min-width: 180px;
+}
+
+.profile-card-title {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.profile-card-val {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--green);
+}
+
+/* ===== SECTION SHARED ===== */
+section {
+  padding: 5rem 2rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--blue-light);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.section-tag::before {
+  content: '';
+  width: 24px; height: 2px;
+  background: var(--blue);
+}
+
+.section-title {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+}
+
+.section-desc {
+  color: var(--text-muted);
+  font-size: 1rem;
+  max-width: 600px;
+  margin-bottom: 3rem;
+}
+
+/* ===== EXPERTISE CARDS ===== */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue), var(--green));
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.card:hover {
+  border-color: var(--blue);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(37,99,235,0.2);
+}
+
+.card:hover::before { opacity: 1; }
+
+.card-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.card-desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+
+.tag {
+  background: rgba(37,99,235,0.1);
+  border: 1px solid rgba(37,99,235,0.2);
+  color: var(--blue-light);
+  font-size: 0.7rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-family: var(--font-en);
+  font-weight: 500;
+}
+
+/* ===== ACHIEVEMENTS ===== */
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.achievement {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.achievement::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(37,99,235,0.08), transparent);
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.achievement:hover::after { opacity: 1; }
+
+.achievement-num {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--blue-light);
+  line-height: 1;
+  font-family: var(--font-en);
+}
+
+.achievement-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+/* ===== ABOUT PAGE ===== */
+.about-hero {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 4rem;
+  align-items: start;
+  padding: 3rem 2rem 2rem;
+}
+
+.about-photo-wrap { position: relative; }
+
+.about-photo {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 20px;
+  border: 2px solid var(--border);
+  display: block;
+  filter: contrast(1.05);
+}
+
+.about-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.about-info-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+}
+
+.about-info-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.25rem;
+}
+
+.about-info-val {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-right: 2rem;
+}
+
+body.ltr .timeline {
+  padding-right: 0;
+  padding-left: 2rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  right: 0; width: 2px;
+  background: linear-gradient(to bottom, var(--blue), transparent);
+}
+
+body.ltr .timeline::before {
+  right: auto;
+  left: 0;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2.5rem;
+  padding: 1.5rem 2rem 1.5rem 0;
+}
+
+body.ltr .timeline-item {
+  padding: 1.5rem 0 1.5rem 2rem;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  right: -5px; top: 1.8rem;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--blue);
+  border: 2px solid var(--navy);
+  box-shadow: 0 0 12px var(--blue-glow);
+}
+
+body.ltr .timeline-item::before {
+  right: auto;
+  left: -5px;
+}
+
+.timeline-period {
+  font-size: 0.75rem;
+  color: var(--blue-light);
+  font-family: var(--font-en);
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-company {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.2rem;
+}
+
+.timeline-role {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.timeline-points {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.timeline-points li {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  padding-right: 1.2rem;
+  position: relative;
+}
+
+body.ltr .timeline-points li {
+  padding-right: 0;
+  padding-left: 1.2rem;
+}
+
+.timeline-points li::before {
+  content: '›';
+  position: absolute;
+  right: 0; top: 0;
+  color: var(--blue);
+}
+
+body.ltr .timeline-points li::before {
+  right: auto;
+  left: 0;
+}
+
+.timeline-achievement {
+  margin-top: 0.75rem;
+  background: rgba(16,185,129,0.08);
+  border: 1px solid rgba(16,185,129,0.2);
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.8rem;
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Certs */
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.cert-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: var(--transition);
+}
+
+.cert-card:hover {
+  border-color: var(--blue);
+  transform: translateY(-2px);
+}
+
+.cert-icon {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  background: rgba(37,99,235,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.cert-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.3;
+}
+
+.cert-org {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: var(--font-en);
+  margin-top: 0.2rem;
+}
+/* Cert Category Title */
+.cert-category-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin: 2rem 0 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  letter-spacing: 0.5px;
+}
+.cert-category-title:first-child { margin-top: 0; }
+
+
+/* Skills */
+.skills-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.skill-group-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--blue-light);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.75rem;
+}
+
+.skill-bar-wrap { margin-bottom: 1rem; }
+
+.skill-bar-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--text-main);
+}
+
+.skill-bar {
+  height: 6px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.skill-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--blue), var(--blue-light));
+  transition: width 1.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+.skill-bar-fill.green { background: linear-gradient(90deg, var(--green), #34D399); }
+
+/* ===== PORTFOLIO PAGE ===== */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2rem;
+}
+
+.project-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.project-card:hover {
+  border-color: var(--blue);
+  transform: translateY(-6px);
+  box-shadow: 0 24px 50px rgba(0,0,0,0.4);
+}
+
+.project-header {
+  padding: 2rem;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(37,99,235,0.08), transparent);
+}
+
+.project-tag {
+  display: inline-block;
+  background: rgba(37,99,235,0.15);
+  color: var(--blue-light);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-en);
+}
+
+.project-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.project-body {
+  padding: 1.5rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.project-meta { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.meta-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.meta-label {
+  font-size: 0.7rem;
+  color: var(--blue-light);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  min-width: 70px;
+  margin-top: 0.1rem;
+  font-family: var(--font-en);
+}
+
+.meta-value {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.project-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.project-result {
+  background: rgba(16,185,129,0.08);
+  border: 1px solid rgba(16,185,129,0.2);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  color: var(--green);
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+/* ===== CONTACT PAGE ===== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.contact-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: var(--transition);
+  text-decoration: none;
+  color: inherit;
+}
+
+.contact-item:hover {
+  border-color: var(--blue);
+  transform: translateX(-4px);
+}
+
+body.ltr .contact-item:hover { transform: translateX(4px); }
+
+.contact-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: rgba(37,99,235,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.contact-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.contact-val {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--white);
+  font-family: var(--font-en);
+}
+
+/* Form */
+.contact-form {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2.5rem;
+}
+
+.form-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.form-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+
+.form-group label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-group input, .form-group textarea, .form-group select {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-main);
+  font-family: var(--font-ar);
+  font-size: 0.9rem;
+  padding: 0.8rem 1rem;
+  outline: none;
+  transition: var(--transition);
+}
+
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+  border-color: var(--blue);
+  background: rgba(37,99,235,0.05);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+}
+
+.form-group textarea { min-height: 130px; resize: vertical; }
+
+/* ===== TECH STACK SECTION ===== */
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.tech-pill {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--text-muted);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-family: var(--font-en);
+  font-weight: 500;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.tech-pill:hover {
+  border-color: var(--blue);
+  color: var(--blue-light);
+  background: rgba(37,99,235,0.08);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+footer span { color: var(--blue-light); }
+
+/* ===== LIGHT MODE ===== */
+body.light {
+  --navy: #F8FAFC;
+  --navy2: #FFFFFF;
+  --navy3: #EFF6FF;
+  --text-main: #1E293B;
+  --text-muted: #64748B;
+  --border: rgba(37,99,235,0.2);
+  --card-bg: rgba(255,255,255,0.9);
+}
+
+body.light .bg-grid {
+  background-image:
+    linear-gradient(rgba(37,99,235,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,0.06) 1px, transparent 1px);
+}
+
+body.light nav {
+  background: rgba(248,250,252,0.9);
+}
+
+body.light .profile-frame::after {
+  background: #fff;
+}
+
+/* ===== MOBILE NAV ===== */
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+  
+  .nav-links {
+    position: fixed;
+    top: 70px; left: 0; right: 0;
+    background: var(--navy2);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    padding: 1rem;
+    gap: 0.25rem;
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
+    z-index: 999;
+  }
+  
+  .nav-links.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+  
+  .nav-links a { padding: 0.7rem 1rem; border-radius: 8px; font-size: 0.95rem; }
+  
+  .hero-content { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-image { order: -1; }
+  .profile-frame { width: 280px; height: 320px; }
+  .profile-card { right: -10px; bottom: -10px; }
+  
+  .about-hero { grid-template-columns: 1fr; }
+  .about-info-grid { grid-template-columns: 1fr 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .skills-section { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .hero-stats { gap: 1.5rem; }
+  
+  section { padding: 3rem 1.25rem; }
+  .container { padding: 0 0.25rem; }
+  
+  .portfolio-grid { grid-template-columns: 1fr; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .achievements-grid { grid-template-columns: repeat(2, 1fr); }
+  .certs-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ===== ANIMATIONS ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in:nth-child(1) { animation-delay: 0.1s; }
+.fade-in:nth-child(2) { animation-delay: 0.2s; }
+.fade-in:nth-child(3) { animation-delay: 0.3s; }
+.fade-in:nth-child(4) { animation-delay: 0.4s; }
+.fade-in:nth-child(5) { animation-delay: 0.5s; }
+.fade-in:nth-child(6) { animation-delay: 0.6s; }
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 0 2rem;
+}
+
+.availability-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(16,185,129,0.08);
+  border: 1px solid rgba(16,185,129,0.25);
+  border-radius: 50px;
+  padding: 0.6rem 1.4rem;
+  color: var(--green);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.availability-badge .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 1.5s infinite;
+}
+
+.hero-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+
+.social-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.35rem 0.9rem 0.35rem 0.7rem;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: var(--transition);
+  font-family: var(--font-en);
+}
+
+.social-pill svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.social-pill:hover { transform: translateY(-2px); color: var(--white); }
+.social-pill.wa:hover  { background: rgba(37,211,102,0.15); border-color: #25D366; }
+.social-pill.wa svg    { fill: #25D366; }
+.social-pill.li:hover  { background: rgba(10,102,194,0.2);  border-color: #0A66C2; }
+.social-pill.li svg    { fill: #0A66C2; }
+.social-pill.gh:hover  { background: rgba(255,255,255,0.1); border-color: #fff; }
+.social-pill.gh svg    { fill: var(--text-muted); }
+.social-pill.gh:hover svg { fill: #fff; }
+.social-pill.yt:hover  { background: rgba(255,0,0,0.15);    border-color: #FF0000; }
+.social-pill.yt svg    { fill: #FF0000; }
+.social-pill.tw:hover  { background: rgba(0,0,0,0.3);       border-color: #000; }
+.social-pill.tw svg    { fill: var(--text-muted); }
+.social-pill.tw:hover svg { fill: #fff; }
+.social-pill.fb:hover  { background: rgba(24,119,242,0.2);  border-color: #1877F2; }
+.social-pill.fb svg    { fill: #1877F2; }
+
+/* Contact page social icons */
+.contact-item .social-icon-wrap {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.contact-item .social-icon-wrap svg { width: 22px; height: 22px; }
+.ci-wa  { background: rgba(37,211,102,0.12); }  .ci-wa  svg { fill: #25D366; }
+.ci-li  { background: rgba(10,102,194,0.12);  }  .ci-li  svg { fill: #0A66C2; }
+.ci-gh  { background: rgba(255,255,255,0.07); }  .ci-gh  svg { fill: #ccc; }
+.ci-yt  { background: rgba(255,0,0,0.12);     }  .ci-yt  svg { fill: #FF0000; }
+.ci-tw  { background: rgba(255,255,255,0.07); }  .ci-tw  svg { fill: #ccc; }
+.ci-fb  { background: rgba(24,119,242,0.12);  }  .ci-fb  svg { fill: #1877F2; }
+.ci-ph  { background: rgba(37,99,235,0.12);   }  .ci-ph  svg { fill: var(--blue-light); }
+.ci-em  { background: rgba(16,185,129,0.12);  }  .ci-em  svg { fill: var(--green); }
+.ci-loc { background: rgba(148,163,184,0.1);  }  .ci-loc svg { fill: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="bg-orb1"></div>
+<div class="bg-orb2"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">MF<span>.</span></div>
+  
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#" onclick="showPage('home')" class="active" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+    <li><a href="#" onclick="showPage('about')" data-ar="عن محمد" data-en="About Me">عن محمد</a></li>
+    <li><a href="#" onclick="showPage('portfolio')" data-ar="المشاريع" data-en="Portfolio">المشاريع</a></li>
+    <li><a href="#" onclick="showPage('blog')" data-ar="المدونة" data-en="Blog">المدونة</a></li>
+    <li><a href="#" onclick="showPage('contact')" data-ar="التواصل" data-en="Contact">التواصل</a></li>
+  </ul>
+  
+  <div class="nav-actions">
+    <button class="lang-toggle" onclick="toggleLang()" id="langBtn">EN</button>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">☀️</button>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ================== HOME PAGE ================== -->
+<div class="page active" id="page-home">
+  
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content container">
+      <div class="hero-text fade-in">
+        <div class="hero-badge" data-ar="متاح للفرص الجديدة" data-en="Open to New Opportunities">متاح للفرص الجديدة</div>
+        
+        <h1 class="hero-title">
+          <span data-ar="مهندس شبكات وبنية تحتية" data-en="Network & Infrastructure">مهندس شبكات وبنية تحتية</span>
+          <br>
+          <span class="highlight" data-ar="L2 / L3 متخصص" data-en="L2 / L3 Specialist">L2 / L3 متخصص</span>
+        </h1>
+        
+        <p class="hero-subtitle" data-ar="أكثر من 6 سنوات خبرة في إدارة بيئات NOC الاحترافية وضمان استقرار الخدمات بنسبة 99.9%. متخصص في عمليات التصعيد L2/L3 وتحسين الأداء وتقليل الأعطال التشغيلية." data-en="Enterprise-focused L2/L3 Network Engineer with 6+ years of experience in ISP-grade and multi-site infrastructures. Specialized in 24/7 NOC operations, SLA-driven environments, and proactive incident management.">
+          أكثر من 6 سنوات خبرة في إدارة بيئات NOC الاحترافية وضمان استقرار الخدمات بنسبة 99.9%. متخصص في عمليات التصعيد L2/L3 وتحسين الأداء وتقليل الأعطال التشغيلية.
+        </p>
+        
+        <div class="hero-stats">
+          <div class="stat fade-in">
+            <div class="stat-num">6+</div>
+            <div class="stat-label" data-ar="سنوات خبرة" data-en="Years Exp.">سنوات خبرة</div>
+          </div>
+          <div class="stat fade-in">
+            <div class="stat-num">99.9%</div>
+            <div class="stat-label" data-ar="وقت تشغيل مضمون" data-en="Uptime SLA">وقت تشغيل مضمون</div>
+          </div>
+          <div class="stat fade-in">
+            <div class="stat-num">450+</div>
+            <div class="stat-label" data-ar="حادثة محلولة" data-en="Incidents Resolved">حادثة محلولة</div>
+          </div>
+          <div class="stat fade-in">
+            <div class="stat-num">25+</div>
+            <div class="stat-label" data-ar="فرع مُدار" data-en="Branches Managed">فرع مُدار</div>
+          </div>
+        </div>
+        
+        <div class="hero-btns fade-in">
+          <a href="#" onclick="showPage('about')" class="btn-primary">👤 <span data-ar="عرض خبرتي" data-en="View My Experience">عرض خبرتي</span></a>
+          <a href="MOHAMED_FAROUG_L2_Support_Engineer_CV__1_.pdf" download class="btn-outline">⬇️ <span data-ar="تحميل السيرة الذاتية" data-en="Download CV">تحميل السيرة الذاتية</span></a>
+        </div>
+
+        <div class="hero-socials fade-in">
+          <a href="https://wa.me/966548239346" target="_blank" class="social-pill wa" title="WhatsApp">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp
+          </a>
+          <a href="https://linkedin.com/in/mohamed-faroug" target="_blank" class="social-pill li" title="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://github.com/Mohamed-Faroug" target="_blank" class="social-pill gh" title="GitHub">
+            <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            GitHub
+          </a>
+          <a href="https://www.youtube.com/@Mohamed-Faroug" target="_blank" class="social-pill yt" title="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+            YouTube
+          </a>
+          <a href="https://twitter.com/MohamedFroug" target="_blank" class="social-pill tw" title="Twitter / X">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            Twitter
+          </a>
+          <a href="https://facebook.com/Mohamed.Froug" target="_blank" class="social-pill fb" title="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Facebook
+          </a>
+        </div>
+      </div>
+      
+      <div class="hero-image fade-in">
+        <div class="profile-frame">
+          <img src="1755410972131.png" alt="Mohamed Faroug" class="profile-img">
+          <div class="profile-card">
+            <div class="profile-card-title" data-ar="حالة التوفر" data-en="Status">حالة التوفر</div>
+            <div class="profile-card-val" data-ar="✅ متاح الآن" data-en="✅ Available Now">✅ متاح الآن</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- EXPERTISE -->
+  <section>
+    <div class="container">
+      <div class="section-tag" data-ar="مجالات الخبرة" data-en="Core Expertise">مجالات الخبرة</div>
+      <h2 class="section-title" data-ar="التخصصات التقنية" data-en="Technical Specializations">التخصصات التقنية</h2>
+      <p class="section-desc" data-ar="خبرة واسعة في تصميم ودعم البنية التحتية للشبكات والأنظمة في بيئات المؤسسات ومزودي خدمة الإنترنت" data-en="Deep expertise in designing and supporting network & systems infrastructure across enterprise and ISP environments.">خبرة واسعة في تصميم ودعم البنية التحتية للشبكات والأنظمة في بيئات المؤسسات ومزودي خدمة الإنترنت</p>
+      
+      <div class="cards-grid">
+        <div class="card fade-in">
+          <span class="card-icon">📡</span>
+          <div class="card-title" data-ar="NOC ومراقبة الشبكة" data-en="NOC & Network Monitoring">NOC ومراقبة الشبكة</div>
+          <div class="card-desc" data-ar="إدارة مراكز العمليات الشبكية على مدار 24/7، مراقبة استباقية، تحليل التنبيهات وإدارة الحوادث" data-en="24/7 NOC operations management, proactive monitoring, alert analysis, and incident management.">إدارة مراكز العمليات الشبكية على مدار 24/7، مراقبة استباقية، تحليل التنبيهات وإدارة الحوادث</div>
+          <div class="card-tags">
+            <span class="tag">Cacti</span>
+            <span class="tag">SolarWinds</span>
+            <span class="tag">SNMP</span>
+            <span class="tag">RCA</span>
+          </div>
+        </div>
+        
+        <div class="card fade-in">
+          <span class="card-icon">🔌</span>
+          <div class="card-title" data-ar="هندسة الشبكات L2/L3" data-en="Network Engineering L2/L3">هندسة الشبكات L2/L3</div>
+          <div class="card-desc" data-ar="تصميم وتنفيذ الشبكات المعقدة، توجيه متقدم، إدارة الشبكات الافتراضية" data-en="Complex network design and implementation, advanced routing protocols, VLAN management.">تصميم وتنفيذ الشبكات المعقدة، توجيه متقدم، إدارة الشبكات الافتراضية</div>
+          <div class="card-tags">
+            <span class="tag">Cisco ASR</span>
+            <span class="tag">BGP</span>
+            <span class="tag">OSPF</span>
+            <span class="tag">VLANs</span>
+          </div>
+        </div>
+        
+        <div class="card fade-in">
+          <span class="card-icon">🛡️</span>
+          <div class="card-title" data-ar="الجدران النارية والأمن" data-en="Firewalls & Security">الجدران النارية والأمن</div>
+          <div class="card-desc" data-ar="تكوين وإدارة جدران الحماية المتقدمة، SD-WAN، VPN، تحليل حركة المرور" data-en="Advanced firewall configuration and management, SD-WAN, VPN tunnels, traffic inspection.">تكوين وإدارة جدران الحماية المتقدمة، SD-WAN، VPN، تحليل حركة المرور</div>
+          <div class="card-tags">
+            <span class="tag">FortiGate</span>
+            <span class="tag">Sophos XGS</span>
+            <span class="tag">SD-WAN</span>
+            <span class="tag">IPsec</span>
+          </div>
+        </div>
+        
+        <div class="card fade-in">
+          <span class="card-icon">🖥️</span>
+          <div class="card-title" data-ar="المحاكاة الافتراضية والخوادم" data-en="Virtualization & Servers">المحاكاة الافتراضية والخوادم</div>
+          <div class="card-desc" data-ar="إدارة بيئات المحاكاة الافتراضية، نشر الخوادم، إدارة Active Directory" data-en="Virtual environment management, server deployment, Active Directory and enterprise systems.">إدارة بيئات المحاكاة الافتراضية، نشر الخوادم، إدارة Active Directory</div>
+          <div class="card-tags">
+            <span class="tag">Proxmox VE</span>
+            <span class="tag">Windows Server</span>
+            <span class="tag">Rocky Linux</span>
+            <span class="tag">AD/GPO</span>
+          </div>
+        </div>
+        
+        <div class="card fade-in">
+          <span class="card-icon">☁️</span>
+          <div class="card-title" data-ar="Microsoft 365 والتطبيقات" data-en="Microsoft 365 & Enterprise Apps">Microsoft 365 والتطبيقات</div>
+          <div class="card-desc" data-ar="إدارة Microsoft 365، تكوين Exchange وTeams، إدارة قواعد بيانات SQL" data-en="Microsoft 365 administration, Exchange and Teams configuration, SQL database management.">إدارة Microsoft 365، تكوين Exchange وTeams، إدارة قواعد بيانات SQL</div>
+          <div class="card-tags">
+            <span class="tag">M365</span>
+            <span class="tag">Exchange</span>
+            <span class="tag">SQL</span>
+            <span class="tag">VoIP</span>
+          </div>
+        </div>
+        
+        <div class="card fade-in">
+          <span class="card-icon">📋</span>
+          <div class="card-title" data-ar="إدارة الخدمات IT" data-en="IT Service Management">إدارة الخدمات IT</div>
+          <div class="card-desc" data-ar="إدارة التذاكر والحوادث وفق منهجية ITIL، متابعة SLA وKPI، التوثيق التقني" data-en="ITIL-aligned ticket and incident management, SLA/KPI tracking, technical documentation.">إدارة التذاكر والحوادث وفق منهجية ITIL، متابعة SLA وKPI، التوثيق التقني</div>
+          <div class="card-tags">
+            <span class="tag">GLPI</span>
+            <span class="tag">osTicket</span>
+            <span class="tag">ITIL</span>
+            <span class="tag">SLA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ACHIEVEMENTS -->
+  <section>
+    <div class="container">
+      <div class="section-tag" data-ar="الإنجازات" data-en="Key Achievements">الإنجازات</div>
+      <h2 class="section-title" data-ar="أرقام تتحدث" data-en="Numbers That Speak">أرقام تتحدث</h2>
+      
+      <div class="achievements-grid">
+        <div class="achievement fade-in">
+          <div class="achievement-num">99.9%</div>
+          <div class="achievement-label" data-ar="نسبة وقت التشغيل المحققة" data-en="Uptime SLA Maintained">نسبة وقت التشغيل المحققة</div>
+        </div>
+        <div class="achievement fade-in">
+          <div class="achievement-num">35%</div>
+          <div class="achievement-label" data-ar="تحسين في MTTR" data-en="MTTR Improvement">تحسين في MTTR</div>
+        </div>
+        <div class="achievement fade-in">
+          <div class="achievement-num">450+</div>
+          <div class="achievement-label" data-ar="حادثة تم حلها خلال 6 أشهر" data-en="Incidents Resolved in 6 months">حادثة تم حلها خلال 6 أشهر</div>
+        </div>
+        <div class="achievement fade-in">
+          <div class="achievement-num">340+</div>
+          <div class="achievement-label" data-ar="كاميرا مراقبة تحت الإدارة" data-en="CCTV Systems Managed">كاميرا مراقبة تحت الإدارة</div>
+        </div>
+        <div class="achievement fade-in">
+          <div class="achievement-num">25+</div>
+          <div class="achievement-label" data-ar="فرع مُدار بدون أي انتهاك SLA" data-en="Branches with Zero SLA Breach">فرع مُدار بدون أي انتهاك SLA</div>
+        </div>
+        <div class="achievement fade-in">
+          <div class="achievement-num">30%</div>
+          <div class="achievement-label" data-ar="تقليل وقت التوقف عن العمل" data-en="Reduction in Network Downtime">تقليل وقت التوقف عن العمل</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH STACK -->
+  <section>
+    <div class="container">
+      <div class="section-tag" data-ar="التقنيات المستخدمة" data-en="Technology Stack">التقنيات المستخدمة</div>
+      <h2 class="section-title" data-ar="الأدوات والتقنيات" data-en="Tools & Technologies">الأدوات والتقنيات</h2>
+      <div class="tech-stack">
+        <div class="tech-pill">🔷 Cisco ASR/Catalyst</div>
+        <div class="tech-pill">🛡️ FortiGate 100F</div>
+        <div class="tech-pill">🛡️ Sophos XGS 2300</div>
+        <div class="tech-pill">🌐 BGP / OSPF</div>
+        <div class="tech-pill">📊 Cacti</div>
+        <div class="tech-pill">📡 SolarWinds</div>
+        <div class="tech-pill">🖥️ Proxmox VE</div>
+        <div class="tech-pill">🪟 Windows Server 2022</div>
+        <div class="tech-pill">🐧 Rocky Linux</div>
+        <div class="tech-pill">☁️ Microsoft 365</div>
+        <div class="tech-pill">📋 GLPI</div>
+        <div class="tech-pill">🎫 osTicket</div>
+        <div class="tech-pill">📞 Grandstream UCM</div>
+        <div class="tech-pill">🗄️ SQL Databases</div>
+        <div class="tech-pill">🔒 IPsec / SSL VPN</div>
+        <div class="tech-pill">📹 Hikvision</div>
+        <div class="tech-pill">🍕 Foodics POS</div>
+        <div class="tech-pill">⚙️ OPNsense</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p data-ar="محمد فاروق حسن سليمان — مهندس دعم تقني | جدة، المملكة العربية السعودية" data-en="Mohamed Faroug Hassan Soliman — L2/L3 Network Engineer | Jeddah, Saudi Arabia">محمد فاروق حسن سليمان — مهندس دعم تقني | جدة، المملكة العربية السعودية</p>
+  </footer>
+</div>
+
+
+<!-- ================== ABOUT PAGE ================== -->
+<div class="page" id="page-about">
+  
+  <section>
+    <div class="container">
+      <div class="about-hero">
+        <div class="about-photo-wrap">
+          <img src="1755410972131.png" alt="Mohamed Faroug" class="about-photo">
+          <div class="about-info-grid">
+            <div class="about-info-item">
+              <div class="about-info-label" data-ar="الموقع" data-en="Location">الموقع</div>
+              <div class="about-info-val">Jeddah, KSA</div>
+            </div>
+            <div class="about-info-item">
+              <div class="about-info-label" data-ar="سنوات الخبرة" data-en="Experience">سنوات الخبرة</div>
+              <div class="about-info-val">6+ Years</div>
+            </div>
+            <div class="about-info-item">
+              <div class="about-info-label" data-ar="التخصص" data-en="Specialty">التخصص</div>
+              <div class="about-info-val">NOC / L2/L3</div>
+            </div>
+            <div class="about-info-item">
+              <div class="about-info-label" data-ar="التوافر" data-en="Availability">التوافر</div>
+              <div class="about-info-val" style="color:var(--green)">Hybrid Ready</div>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <div class="section-tag" data-ar="نبذة احترافية" data-en="Professional Summary">نبذة احترافية</div>
+          <h2 class="section-title" data-ar="عن محمد فاروق" data-en="About Mohamed Faroug">عن محمد فاروق</h2>
+          
+          <p style="color:var(--text-muted); line-height:1.9; margin-bottom:1rem;" data-ar="مهندس دعم تقني L2/L3 يمتلك أكثر من 6 سنوات من الخبرة في دعم الشبكات على مستوى مزودي خدمة الإنترنت، ومراكز البيانات، والبنية التحتية لتقنية المعلومات في المؤسسات. يتمتع بخبرة قوية في المراقبة على مدار 24/7، واستكشاف أعطال L2/L3، والاستجابة للحوادث، وإدارة التصعيد، مع الحفاظ على نسبة توافر الخدمة 99.9% عبر بيئات متعددة المواقع." data-en="An Operations-focused L2 Support Engineer with 6+ years of experience supporting ISP-grade networks, data centers, and enterprise IT infrastructure. Strong expertise in 24/7 monitoring, L2/L3 troubleshooting, incident response, and escalation management, consistently maintaining 99.9% service uptime across multi-site environments.">
+            مهندس دعم تقني L2/L3 يمتلك أكثر من 6 سنوات من الخبرة في دعم الشبكات على مستوى مزودي خدمة الإنترنت، ومراكز البيانات، والبنية التحتية لتقنية المعلومات في المؤسسات. يتمتع بخبرة قوية في المراقبة على مدار 24/7، واستكشاف أعطال L2/L3، والاستجابة للحوادث، وإدارة التصعيد، مع الحفاظ على نسبة توافر الخدمة 99.9% عبر بيئات متعددة المواقع.
+          </p>
+          
+          <p style="color:var(--text-muted); line-height:1.9; margin-bottom:2rem;" data-ar="يمتلك خبرة عملية متقدمة في جدران الحماية Sophos وFortiGate، وتقنية SD-WAN، والتوجيه والتحويل من Cisco، وإدارة خوادم Linux وWindows. محترف متوافق مع منهجية ITIL، ويحمل سجلاً حافلاً في حل حجم كبير من التذاكر مع الالتزام بأهداف SLA وKPI الصارمة." data-en="Advanced hands-on experience with Sophos & FortiGate firewalls, SD-WAN, Cisco routing & switching, Linux and Windows Server administration. ITIL-aligned professional with a proven track record of resolving high-volume tickets while meeting strict SLA and KPI targets.">
+            يمتلك خبرة عملية متقدمة في جدران الحماية Sophos وFortiGate، وتقنية SD-WAN، والتوجيه والتحويل من Cisco، وإدارة خوادم Linux وWindows. محترف متوافق مع منهجية ITIL، ويحمل سجلاً حافلاً في حل حجم كبير من التذاكر مع الالتزام بأهداف SLA وKPI الصارمة.
+          </p>
+          
+          <div class="availability-badge">
+            <span class="dot"></span>
+            <span data-ar="متاح للفرص في جدة والرياض (عن بُعد / هجين)" data-en="Available for opportunities in Jeddah & Riyadh (Remote / Hybrid)">متاح للفرص في جدة والرياض (عن بُعد / هجين)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- EXPERIENCE TIMELINE -->
+  <section>
+    <div class="container">
+      <div class="section-tag" data-ar="المسيرة المهنية" data-en="Professional Experience">المسيرة المهنية</div>
+      <h2 class="section-title" data-ar="تاريخ العمل" data-en="Work History">تاريخ العمل</h2>
+      
+      <div class="timeline">
+        <div class="timeline-item fade-in">
+          <div class="timeline-period">Oct 2024 — Jan 2026</div>
+          <div class="timeline-company">NEVELTECH</div>
+          <div class="timeline-role" data-ar="مستشار تقني – الشبكات ومراكز البيانات (قائد NOC)" data-en="Technical Consultant – Network & Data Center (Lead NOC Engineer)">مستشار تقني – الشبكات ومراكز البيانات (قائد NOC) | الرياض، المملكة العربية السعودية</div>
+          <ul class="timeline-points">
+            <li data-ar="قيادة عمليات تصعيد L2/L3 في بيئات ISP والمؤسسات" data-en="Lead L2/L3 escalation engineer for enterprise and ISP client environments.">قيادة عمليات تصعيد L2/L3 في بيئات ISP والمؤسسات</li>
+            <li data-ar="إدارة NOC 24/7 باستخدام Cacti وأدوات SNMP" data-en="24/7 NOC monitoring using Cacti and SNMP-based tools.">إدارة NOC 24/7 باستخدام Cacti وأدوات SNMP</li>
+            <li data-ar="حل 450+ حادثة خلال 6 أشهر عبر GLPI وosTicket" data-en="Managed and resolved 450+ incidents within 6 months using GLPI and osTicket.">حل 450+ حادثة خلال 6 أشهر عبر GLPI وosTicket</li>
+            <li data-ar="التنسيق مع مزودي الخدمة (STC، Mobily، Zain، GO) لضمان SLA" data-en="Coordinated with ISPs (STC, Mobily, Zain, GO) for circuit provisioning and fault resolution.">التنسيق مع مزودي الخدمة (STC، Mobily، Zain، GO) لضمان SLA</li>
+          </ul>
+          <div class="timeline-achievement">🏆 <span data-ar="تقليل أوقات توقف الشبكة بنسبة 30% عبر ضبط التنبيهات الاستباقية" data-en="Reduced overall network downtime by 30% through proactive alert tuning.">تقليل أوقات توقف الشبكة بنسبة 30% عبر ضبط التنبيهات الاستباقية</span></div>
+        </div>
+        
+        <div class="timeline-item fade-in">
+          <div class="timeline-period">Sep 2021 — Dec 2024</div>
+          <div class="timeline-company">TASALI ROASTERY</div>
+          <div class="timeline-role" data-ar="مدير شبكات أول (دعم البنية التحتية L3)" data-en="Senior Network Administrator (L3 Infrastructure Support)">مدير شبكات أول (دعم البنية التحتية L3) | جدة، المملكة العربية السعودية</div>
+          <ul class="timeline-points">
+            <li data-ar="دعم البنية التحتية L3 للمقر الرئيسي و25+ فرعاً" data-en="Led L3 infrastructure support for HQ and 25+ branch locations.">دعم البنية التحتية L3 للمقر الرئيسي و25+ فرعاً</li>
+            <li data-ar="تصميم وتنفيذ بنية SD-WAN الآمنة باستخدام Sophos XGS 2300 وSD-RED 20" data-en="Designed and implemented secure SD-WAN architecture using Sophos XGS 2300 and SD-RED 20.">تصميم وتنفيذ بنية SD-WAN الآمنة باستخدام Sophos XGS 2300 وSD-RED 20</li>
+            <li data-ar="إدارة 340+ كاميرا Hikvision ومنظومات NVR" data-en="Administered and secured 340+ Hikvision IP cameras and NVR systems.">إدارة 340+ كاميرا Hikvision ومنظومات NVR</li>
+            <li data-ar="إدارة Microsoft 365 بما يشمل Exchange وTeams والسياسات الأمنية" data-en="Managed Microsoft 365 tenant including Exchange and Teams issue resolution.">إدارة Microsoft 365 بما يشمل Exchange وTeams والسياسات الأمنية</li>
+          </ul>
+          <div class="timeline-achievement">🏆 <span data-ar="توسع فروع بدون أي انتهاك SLA وتقليل الحوادث المتكررة بنسبة 35%" data-en="Enabled rapid branch expansion with zero SLA breaches. Reduced recurring incidents by 35%.">توسع فروع بدون أي انتهاك SLA وتقليل الحوادث المتكررة بنسبة 35%</span></div>
+        </div>
+        
+        <div class="timeline-item fade-in">
+          <div class="timeline-period">Jan 2020 — Sep 2021</div>
+          <div class="timeline-company">ATBARA CEMENT COMPANY</div>
+          <div class="timeline-role" data-ar="مدير أنظمة أول / منسق برامج" data-en="Senior Systems Administrator / Program Coordinator">مدير أنظمة أول / منسق برامج | السودان</div>
+          <ul class="timeline-points">
+            <li data-ar="نشر ودعم بيئات Windows Server لأنظمة الإنتاج الصناعية" data-en="Deployed and supported Windows Server environments for industrial production systems.">نشر ودعم بيئات Windows Server لأنظمة الإنتاج الصناعية</li>
+            <li data-ar="إدارة Active Directory وDNS وDHCP وضوابط الوصول" data-en="Managed Active Directory, DNS, DHCP, and system access controls.">إدارة Active Directory وDNS وDHCP وضوابط الوصول</li>
+            <li data-ar="تقديم التدريب التقني، مما أدى إلى رفع كفاءة حل Tier 1 بنسبة 60%" data-en="Delivered structured technical training, increasing Tier 1 resolution efficiency by 60%.">تقديم التدريب التقني، مما أدى إلى رفع كفاءة حل Tier 1 بنسبة 60%</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-period">Sep 2019 — Oct 2019</div>
+          <div class="timeline-company">AFRICAN PAINTS</div>
+          <div class="timeline-role" data-ar="ضابط أمن / دعم تطبيقات" data-en="Security Officer / Application Support">ضابط أمن / دعم تطبيقات | السودان</div>
+          <ul class="timeline-points">
+            <li data-ar="الإشراف على منظومة الأمن المادي وأنظمة التحكم في الوصول" data-en="Supervised physical security systems and access control infrastructure.">الإشراف على منظومة الأمن المادي وأنظمة التحكم في الوصول</li>
+            <li data-ar="تقديم دعم تقني للتطبيقات الداخلية وأنظمة المعلومات" data-en="Provided technical support for internal applications and information systems.">تقديم دعم تقني للتطبيقات الداخلية وأنظمة المعلومات</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-period">2018 — 2019</div>
+          <div class="timeline-company">IDCO</div>
+          <div class="timeline-role" data-ar="مطور تطبيقات موبايل وويب" data-en="Mobile & Web Application Developer">مطور تطبيقات موبايل وويب | السودان</div>
+          <ul class="timeline-points">
+            <li data-ar="تطوير تطبيقات الأجهزة المحمولة باستخدام Ionic 5 وAngular" data-en="Developed mobile applications using Ionic 5 and Angular frameworks.">تطوير تطبيقات الأجهزة المحمولة باستخدام Ionic 5 وAngular</li>
+            <li data-ar="بناء وإدارة مواقع WordPress للعملاء" data-en="Built and managed WordPress websites for clients.">بناء وإدارة مواقع WordPress للعملاء</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-period">Nov 2020 — Dec 2020</div>
+          <div class="timeline-company">CODE_SUDAN</div>
+          <div class="timeline-role" data-ar="مدرب ومرشد (عبر الإنترنت)" data-en="Instructor & Mentor (Online)">مدرب ومرشد (عبر الإنترنت)</div>
+          <ul class="timeline-points">
+            <li data-ar="تدريس مفاهيم البرمجة وتحليل البيانات باستخدام SQL لمتعلمين عرب" data-en="Taught programming concepts and SQL data analysis to Arabic-speaking learners.">تدريس مفاهيم البرمجة وتحليل البيانات باستخدام SQL لمتعلمين عرب</li>
+            <li data-ar="تقديم دروس تفاعلية عبر الإنترنت ومراجعة مشاريع الطلاب" data-en="Delivered interactive online lessons and reviewed student projects.">تقديم دروس تفاعلية عبر الإنترنت ومراجعة مشاريع الطلاب</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-period">Oct 2017 — Dec 2017</div>
+          <div class="timeline-company">NILE VALLEY UNIVERSITY</div>
+          <div class="timeline-role" data-ar="معيد تدريس" data-en="Teaching Assistant">معيد تدريس | السودان</div>
+          <ul class="timeline-points">
+            <li data-ar="مساعدة الطلاب في مواد علوم الحاسوب ومشاريع البرمجة" data-en="Assisted students with Computer Science subjects and programming projects.">مساعدة الطلاب في مواد علوم الحاسوب ومشاريع البرمجة</li>
+            <li data-ar="تقديم جلسات مراجعة وحل المسائل البرمجية" data-en="Conducted review sessions and guided students through programming exercises.">تقديم جلسات مراجعة وحل المسائل البرمجية</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-period">Feb 2015 — Jun 2015</div>
+          <div class="timeline-company">SALAH HARD IT</div>
+          <div class="timeline-role" data-ar="مهندس دعم تقني" data-en="Technical Support Engineer">مهندس دعم تقني | السودان</div>
+          <ul class="timeline-points">
+            <li data-ar="صيانة وإصلاح أجهزة الحاسوب والمعدات التقنية" data-en="Maintained and repaired computer hardware and technical equipment.">صيانة وإصلاح أجهزة الحاسوب والمعدات التقنية</li>
+            <li data-ar="تقديم الدعم الفني للعملاء وحل مشاكل البرمجيات والأجهزة" data-en="Provided technical support to customers resolving software and hardware issues.">تقديم الدعم الفني للعملاء وحل مشاكل البرمجيات والأجهزة</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-period">Jul 2015 — Present</div>
+          <div class="timeline-company">FREELANCER</div>
+          <div class="timeline-role" data-ar="فني حاسوب ودعم تقني مستقل" data-en="Computer Technician & Customer Support (Freelance)">فني حاسوب ودعم تقني مستقل</div>
+          <ul class="timeline-points">
+            <li data-ar="تقديم خدمات صيانة وإصلاح أجهزة الحاسوب والشبكات للأفراد والشركات الصغيرة" data-en="Provided computer repair, maintenance, and networking services for individuals and small businesses.">تقديم خدمات صيانة وإصلاح أجهزة الحاسوب والشبكات للأفراد والشركات الصغيرة</li>
+            <li data-ar="دعم العملاء عن بُعد وتقديم الاستشارات التقنية" data-en="Offered remote customer support and technical consultations.">دعم العملاء عن بُعد وتقديم الاستشارات التقنية</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CERTIFICATIONS -->
+  <section>
+    <div class="container">
+      <div class="section-tag" data-ar="الشهادات المهنية" data-en="Certifications">الشهادات المهنية</div>
+      <h2 class="section-title" data-ar="المؤهلات والشهادات" data-en="Qualifications & Certificates">المؤهلات والشهادات</h2>
+      <p class="section-desc" data-ar="جميع شهاداتي المهنية متاحة للتحقق" data-en="All my professional certificates are available for verification.">جميع شهاداتي المهنية متاحة للتحقق</p>
+      
+      <div style="margin-bottom:1.5rem;">
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="btn-primary" style="display:inline-flex;">
+          📄 <span data-ar="عرض جميع الشهادات (Google Drive)" data-en="View All Certificates (Google Drive)">عرض جميع الشهادات (Google Drive)</span>
+        </a>
+      </div>
+      
+
+      <div class="cert-category-title">🎓 <span data-ar="التعليم" data-en="Education">التعليم</span></div>
+      <div class="certs-grid" style="margin-bottom:2.5rem;">
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🎓</div>
+          <div>
+            <div class="cert-name">Bachelor of Computer Sciences</div>
+            <div class="cert-org">Nile Valley University — 2016</div>
+          </div>
+        </a>
+      </div>
+      <div class="cert-category-title">📡 <span data-ar="الشبكات" data-en="Networking">الشبكات</span></div>
+      <div class="certs-grid" style="margin-bottom:2.5rem;">
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🔷</div>
+          <div>
+            <div class="cert-name">CCNA Routing & Switching</div>
+            <div class="cert-org">New Horizon Training Center — 2018</div>
+          </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">📡</div>
+          <div>
+            <div class="cert-name">Network+ Security</div>
+            <div class="cert-org">Sudan Foundation — 2019</div>
+          </div>
+        </a>
+        <a href="https://coursera.org/verify/MF5ZZOLUVAP9" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🌐</div>
+          <div>
+            <div class="cert-name">The Bits and Bytes of Computer Networking</div>
+            <div class="cert-org">Google / Coursera — Sep 2025</div>
+          </div>
+        </a>
+      </div>
+      <div class="cert-category-title">🛡️ <span data-ar="الأمن السيبراني" data-en="Cybersecurity">الأمن السيبراني</span></div>
+      <div class="certs-grid" style="margin-bottom:2.5rem;">
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🛡️</div>
+          <div>
+            <div class="cert-name">مقدمة في الأمن السيبراني</div>
+            <div class="cert-org">سَطر / Tuwaiq Academy — Sep 2025</div>
+          </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🔐</div>
+          <div>
+            <div class="cert-name">مبادئ التشفير</div>
+            <div class="cert-org">سَطر / Tuwaiq Academy — Sep 2025</div>
+          </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">⚠️</div>
+          <div>
+            <div class="cert-name">التهديدات والثغرات في الأمن السيبراني</div>
+            <div class="cert-org">سَطر / Tuwaiq Academy — Sep 2025</div>
+          </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🔒</div>
+          <div>
+            <div class="cert-name">أمن الشبكات 101</div>
+            <div class="cert-org">سَطر / Tuwaiq Academy — Sep 2025</div>
+          </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🔒</div>
+          <div>
+            <div class="cert-name">أمن الشبكات 102</div>
+            <div class="cert-org">سَطر / Tuwaiq Academy — Sep 2025</div>
+          </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">💻</div>
+          <div>
+            <div class="cert-name">Secure Shell (SSH) 101</div>
+            <div class="cert-org">سَطر / Tuwaiq Academy — Sep 2025</div>
+          </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🐧</div>
+          <div>
+            <div class="cert-name">مقدمة في Kali Linux</div>
+            <div class="cert-org">سَطر / Tuwaiq Academy — Sep 2025</div>
+          </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🟢</div>
+          <div>
+            <div class="cert-name">Kaspersky Partner Onboarding Program</div>
+            <div class="cert-org">Kaspersky — Jun 2025</div>
+          </div>
+        </a>
+      </div>
+      <div class="cert-category-title">🐧 <span data-ar="لينكس والأنظمة" data-en="Linux & Systems">لينكس والأنظمة</span></div>
+      <div class="certs-grid" style="margin-bottom:2.5rem;">
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🐧</div>
+          <div>
+            <div class="cert-name">Linux 101</div>
+            <div class="cert-org">سَطر / Tuwaiq Academy — Sep 2025</div>
+          </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">📁</div>
+          <div>
+            <div class="cert-name">Linux: Files and Permissions</div>
+            <div class="cert-org">سَطر / Tuwaiq Academy — Sep 2025</div>
+          </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🐳</div>
+          <div>
+            <div class="cert-name">Docker 101</div>
+            <div class="cert-org">سَطر / Tuwaiq Academy — Sep 2025</div>
+          </div>
+        </a>
+      </div>
+      <div class="cert-category-title">☁️ <span data-ar="الحوسبة السحابية" data-en="Cloud">الحوسبة السحابية</span></div>
+      <div class="certs-grid" style="margin-bottom:2.5rem;">
+        <a href="https://coursera.org/verify/16K71UBFKYOJ" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">☁️</div>
+          <div>
+            <div class="cert-name">AWS S3 Basics</div>
+            <div class="cert-org">Coursera — Feb 2026</div>
+          </div>
+        </a>
+      </div>
+      <div class="cert-category-title">💻 <span data-ar="البرمجة وتطوير الويب" data-en="Programming & Web">البرمجة وتطوير الويب</span></div>
+      <div class="certs-grid" style="margin-bottom:2.5rem;">
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🌍</div>
+          <div>
+            <div class="cert-name">HTML Fundamentals</div>
+            <div class="cert-org">SoloLearn — Mar 2018</div>
+          </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🗄️</div>
+          <div>
+            <div class="cert-name">SQL Fundamentals</div>
+            <div class="cert-org">SoloLearn — Mar 2018</div>
+          </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🗃️</div>
+          <div>
+            <div class="cert-name">SQL for Data Analysis</div>
+            <div class="cert-org">Code_ Sudan — Jul 2022</div>
+          </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🐘</div>
+          <div>
+            <div class="cert-name">PHP Programming</div>
+            <div class="cert-org">Sudan Foundation — Oct 2019</div>
+          </div>
+        </a>
+        <a href="https://coursera.org/verify/PEFMZUNP90V2" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">📱</div>
+          <div>
+            <div class="cert-name">Build a Mobile App with Google Sheets on Glide</div>
+            <div class="cert-org">Coursera — Feb 2026</div>
+          </div>
+        </a>
+      </div>
+      <div class="cert-category-title">🖥️ <span data-ar="دعم تقنية المعلومات" data-en="IT Support">دعم تقنية المعلومات</span></div>
+      <div class="certs-grid" style="margin-bottom:2.5rem;">
+        <a href="https://coursera.org/verify/SUZFN6OXPFIG" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🌐</div>
+          <div>
+            <div class="cert-name">Technical Support Fundamentals</div>
+            <div class="cert-org">Google / Coursera — Sep 2025</div>
+          </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">💽</div>
+          <div>
+            <div class="cert-name">ICDL — International Computer Driving License</div>
+            <div class="cert-org">Sudanese Petroleum Corp — Dec 2018</div>
+          </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">📹</div>
+          <div>
+            <div class="cert-name">Closed Circuit TV (CCTV)</div>
+            <div class="cert-org">New Horizon Training Center — 2018</div>
+          </div>
+        </a>
+      </div>
+      <div class="cert-category-title">📋 <span data-ar="إدارة المشاريع" data-en="Project Management">إدارة المشاريع</span></div>
+      <div class="certs-grid" style="margin-bottom:2.5rem;">
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">📋</div>
+          <div>
+            <div class="cert-name">PMP Exam Preparation Course</div>
+            <div class="cert-org">New Horizon Training Center — 2018</div>
+          </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🚀</div>
+          <div>
+            <div class="cert-name">مدخل لبناء المشاريع الريادية</div>
+            <div class="cert-org">منصة إفهام — يناير 2022</div>
+          </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">📊</div>
+          <div>
+            <div class="cert-name">Excel for Accounting & QuickBooks SMACC</div>
+            <div class="cert-org">مركز النهرين — مارس 2021 · ممتاز</div>
+          </div>
+        </a>
+      </div>
+      <div class="cert-category-title">🏛️ <span data-ar="علوم الحاسوب" data-en="Computer Science">علوم الحاسوب</span></div>
+      <div class="certs-grid" style="margin-bottom:2.5rem;">
+        <a href="https://cs50.harvard.edu/certificates/eb28d335-fe11-42af-9787-c49151071390" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🏛️</div>
+          <div>
+            <div class="cert-name">CS50x — Intro to Computer Science</div>
+            <div class="cert-org">Harvard University — 2020</div>
+          </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">⌨️</div>
+          <div>
+            <div class="cert-name">The Hour of Code</div>
+            <div class="cert-org">Code.org</div>
+          </div>
+        </a>
+      </div>
+      <div class="cert-category-title">🔍 <span data-ar="المهارات الرقمية" data-en="Digital Skills">المهارات الرقمية</span></div>
+      <div class="certs-grid" style="margin-bottom:2.5rem;">
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🔍</div>
+          <div>
+            <div class="cert-name">Google Search for Beginners</div>
+            <div class="cert-org">Grow with Google — Mar 2022</div>
+          </div>
+        </a>
+        <a href="https://coursera.org/verify/NAZSGCBYV12T" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🎨</div>
+          <div>
+            <div class="cert-name">إنشاء تصاميم تسويقية باستخدام كانفا</div>
+            <div class="cert-org">Coursera Project Network — Dec 2024</div>
+          </div>
+        </a>
+      </div>
+      <div class="cert-category-title">🕌 <span data-ar="وزارة الحج والعمرة" data-en="Ministry of Hajj & Umrah">وزارة الحج والعمرة</span></div>
+      <div class="certs-grid" style="margin-bottom:2.5rem;">
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🕌</div>
+          <div>
+            <div class="cert-name">مسار رحلات العمرة</div>
+            <div class="cert-org">وزارة الحج والعمرة</div>
+          </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🕌</div>
+          <div>
+            <div class="cert-name">مسار رحلات مكة المكرمة</div>
+            <div class="cert-org">وزارة الحج والعمرة</div>
+          </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🕌</div>
+          <div>
+            <div class="cert-name">مسار رحلات المدينة المنورة</div>
+            <div class="cert-org">وزارة الحج والعمرة</div>
+          </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🕌</div>
+          <div>
+            <div class="cert-name">مسار رحلات الحج</div>
+            <div class="cert-org">وزارة الحج والعمرة</div>
+          </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1YptKyxLiBNjytF2dHi7aTZuwv44HR5c5/view?usp=sharing" target="_blank" class="cert-card fade-in" style="text-decoration:none;color:inherit;">
+          <div class="cert-icon">🕌</div>
+          <div>
+            <div class="cert-name">اجتياز كافة مسارات البوابة المعرفية</div>
+            <div class="cert-org">وزارة الحج والعمرة</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SKILLS -->
+  <section>
+    <div class="container">
+      <div class="section-tag" data-ar="مستوى المهارات" data-en="Skill Levels">مستوى المهارات</div>
+      <h2 class="section-title" data-ar="الكفاءات التقنية" data-en="Technical Proficiency">الكفاءات التقنية</h2>
+      
+      <div class="skills-section">
+        <div>
+          <div class="skill-group-title" data-ar="الشبكات والأمن" data-en="Networking & Security">الشبكات والأمن</div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>Cisco (ASR/Catalyst)</span><span>95%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:95%"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>FortiGate / Sophos</span><span>90%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:90%"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>BGP / OSPF / SD-WAN</span><span>85%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:85%"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>IPsec / SSL VPN</span><span>88%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:88%"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>Sophos XG2300 / SD-RED</span><span>92%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:92%"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>VLAN / VPN / TCP-IP</span><span>90%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:90%"></div></div>
+          </div>
+        </div>
+        <div>
+          <div class="skill-group-title" data-ar="الأنظمة والبنية التحتية" data-en="Systems & Infrastructure">الأنظمة والبنية التحتية</div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>Windows Server / AD</span><span>92%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill green" style="width:92%"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>Proxmox VE / Linux</span><span>85%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill green" style="width:85%"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>Microsoft 365</span><span>90%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill green" style="width:90%"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>NOC Monitoring (Cacti)</span><span>95%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill green" style="width:95%"></div></div>
+          </div>
+        </div>
+        <div>
+          <div class="skill-group-title" data-ar="البرمجة وتطوير الويب" data-en="Programming & Web">البرمجة وتطوير الويب</div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>Python / Java / C#</span><span>80%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:80%"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>Oracle SQL / PL/SQL</span><span>85%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:85%"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>HTML / CSS / JavaScript / Angular</span><span>82%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:82%"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>Ionic / Android Dev / Firebase</span><span>75%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:75%"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>Docker / Git / Bash Scripting</span><span>78%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" style="width:78%"></div></div>
+          </div>
+        </div>
+        <div>
+          <div class="skill-group-title" data-ar="الأدوات التقنية" data-en="Tools & Systems">الأدوات التقنية</div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>Foodics POS</span><span>95%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill green" style="width:95%"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>CCTV Systems (Hikvision)</span><span>95%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill green" style="width:95%"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span>UCM6204 PBX / VoIP</span><span>88%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill green" style="width:88%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section>
+    <div class="container">
+      <div class="card" style="max-width:600px; display:flex; gap:1.5rem; align-items:center;">
+        <div style="font-size:3rem;">🎓</div>
+        <div>
+          <div style="color:var(--text-muted); font-size:0.75rem; letter-spacing:1px; text-transform:uppercase; margin-bottom:0.25rem;" data-ar="التعليم" data-en="Education">التعليم</div>
+          <div class="card-title" data-ar="بكالوريوس علوم الحاسوب" data-en="Bachelor of Computer Science">بكالوريوس علوم الحاسوب</div>
+          <div style="color:var(--text-muted); font-size:0.875rem;" data-ar="جامعة نهر النيل — السودان، 2016" data-en="Nile Valley University — Sudan, 2016">جامعة نهر النيل — السودان، 2016</div>
+          <div class="timeline-achievement" style="margin-top:0.75rem;">🥇 <span data-ar="المرتبة الأولى – أفضل مشروع تخرج" data-en="Ranked 1st – Best Graduation Project">المرتبة الأولى – أفضل مشروع تخرج</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p data-ar="محمد فاروق حسن سليمان — مهندس دعم تقني | جدة، المملكة العربية السعودية" data-en="Mohamed Faroug Hassan Soliman — L2/L3 Network Engineer | Jeddah, Saudi Arabia">محمد فاروق حسن سليمان — مهندس دعم تقني | جدة، المملكة العربية السعودية</p>
+  </footer>
+</div>
+
+
+<!-- ================== PORTFOLIO PAGE ================== -->
+<div class="page" id="page-portfolio">
+  
+  <section>
+    <div class="container">
+      <div class="section-tag" data-ar="المشاريع المؤسسية" data-en="Enterprise Deployments">المشاريع المؤسسية</div>
+      <h2 class="section-title" data-ar="نماذج من الأعمال" data-en="Infrastructure Portfolio">نماذج من الأعمال</h2>
+      <p class="section-desc" data-ar="عينة من أبرز المشاريع والنشرات التقنية التي تمت إدارتها وتنفيذها في بيئات المؤسسات" data-en="A selection of key technical projects and enterprise deployments designed, implemented, and managed.">عينة من أبرز المشاريع والنشرات التقنية التي تمت إدارتها وتنفيذها في بيئات المؤسسات</p>
+      
+      <div class="portfolio-grid">
+        
+        <div class="project-card fade-in">
+          <div class="project-header">
+            <div class="project-tag">SD-WAN</div>
+            <div class="project-title" data-ar="تصميم وتنفيذ بنية SD-WAN المؤسسية" data-en="Enterprise SD-WAN Architecture Implementation">تصميم وتنفيذ بنية SD-WAN المؤسسية</div>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <div class="meta-row">
+                <div class="meta-label">Problem</div>
+                <div class="meta-value" data-ar="ربط 25+ فرع عبر شبكات WAN غير مستقرة مع تكلفة عالية لخطوط الربط المخصصة" data-en="Connecting 25+ branches over unstable WAN connections with high MPLS costs.">ربط 25+ فرع عبر شبكات WAN غير مستقرة مع تكلفة عالية لخطوط الربط المخصصة</div>
+              </div>
+              <div class="meta-row">
+                <div class="meta-label">Solution</div>
+                <div class="meta-value" data-ar="نشر بنية SD-WAN باستخدام Sophos XGS 2300 وSD-RED 20 مع تحسين جودة الخدمة QoS" data-en="Deployed SD-WAN architecture using Sophos XGS 2300 and SD-RED 20 appliances with QoS policies.">نشر بنية SD-WAN باستخدام Sophos XGS 2300 وSD-RED 20 مع تحسين جودة الخدمة QoS</div>
+              </div>
+            </div>
+            <div class="project-tools">
+              <span class="tag">Sophos XGS 2300</span>
+              <span class="tag">SD-RED 20</span>
+              <span class="tag">QoS</span>
+              <span class="tag">IPsec VPN</span>
+            </div>
+            <div class="project-result">✅ <span data-ar="نسبة استقرار 99.5%+ لجميع الفروع مع توفير تكاليف ملحوظ" data-en="Achieved 99.5%+ uptime across all branches with significant cost savings.">نسبة استقرار 99.5%+ لجميع الفروع مع توفير تكاليف ملحوظ</span></div>
+          </div>
+        </div>
+        
+        <div class="project-card fade-in">
+          <div class="project-header">
+            <div class="project-tag">Infrastructure</div>
+            <div class="project-title" data-ar="توسعة 25 فرع تجزئة بدون انتهاك SLA" data-en="25-Branch Retail Infrastructure Rollout">توسعة 25 فرع تجزئة بدون انتهاك SLA</div>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <div class="meta-row">
+                <div class="meta-label">Problem</div>
+                <div class="meta-value" data-ar="توسعة سريعة للسلسلة التجارية مع ضمان استمرارية عمليات نقاط البيع وأنظمة التوصيل" data-en="Rapid retail chain expansion while ensuring POS continuity and delivery platform integrations.">توسعة سريعة للسلسلة التجارية مع ضمان استمرارية عمليات نقاط البيع وأنظمة التوصيل</div>
+              </div>
+              <div class="meta-row">
+                <div class="meta-label">Solution</div>
+                <div class="meta-value" data-ar="تصميم نموذج شبكي موحد لكل فرع مع تكاملات Foodics POS وجاهز وHungerStation" data-en="Designed a standardized branch network model with Foodics POS and delivery platform integrations.">تصميم نموذج شبكي موحد لكل فرع مع تكاملات Foodics POS وجاهز وHungerStation</div>
+              </div>
+            </div>
+            <div class="project-tools">
+              <span class="tag">Cisco Catalyst</span>
+              <span class="tag">Foodics POS</span>
+              <span class="tag">Hikvision NVR</span>
+              <span class="tag">M365</span>
+            </div>
+            <div class="project-result">✅ <span data-ar="صفر انتهاكات SLA خلال فترة التوسع الكاملة وتقليل الحوادث المتكررة 35%" data-en="Zero SLA breaches during full expansion period. 35% reduction in recurring incidents.">صفر انتهاكات SLA خلال فترة التوسع الكاملة وتقليل الحوادث المتكررة 35%</span></div>
+          </div>
+        </div>
+        
+        <div class="project-card fade-in">
+          <div class="project-header">
+            <div class="project-tag">Virtualization</div>
+            <div class="project-title" data-ar="نشر Proxmox HA Cluster في مركز البيانات" data-en="Proxmox HA Cluster Data Center Deployment">نشر Proxmox HA Cluster في مركز البيانات</div>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <div class="meta-row">
+                <div class="meta-label">Problem</div>
+                <div class="meta-value" data-ar="الحاجة لبيئة افتراضية عالية التوافر لاستضافة أعباء العمل الحرجة لعملاء ISP" data-en="Need for a high-availability virtualization environment to host critical ISP client workloads.">الحاجة لبيئة افتراضية عالية التوافر لاستضافة أعباء العمل الحرجة لعملاء ISP</div>
+              </div>
+              <div class="meta-row">
+                <div class="meta-label">Solution</div>
+                <div class="meta-value" data-ar="بناء Proxmox VE Cluster على خوادم HPE Gen10 مع Rocky Linux وWindows Server 2022" data-en="Built Proxmox VE HA cluster on HPE Gen10 servers running Rocky Linux and Windows Server 2022 VMs.">بناء Proxmox VE Cluster على خوادم HPE Gen10 مع Rocky Linux وWindows Server 2022</div>
+              </div>
+            </div>
+            <div class="project-tools">
+              <span class="tag">Proxmox VE</span>
+              <span class="tag">HPE Gen10</span>
+              <span class="tag">Rocky Linux</span>
+              <span class="tag">Windows Server 2022</span>
+            </div>
+            <div class="project-result">✅ <span data-ar="بيئة HA مستقرة تدعم أعباء عمل متعددة مع تقليل التوقف عن العمل 30%" data-en="Stable HA environment supporting multiple workloads. 30% reduction in downtime.">بيئة HA مستقرة تدعم أعباء عمل متعددة مع تقليل التوقف عن العمل 30%</span></div>
+          </div>
+        </div>
+        
+        <div class="project-card fade-in">
+          <div class="project-header">
+            <div class="project-tag">Microsoft 365</div>
+            <div class="project-title" data-ar="إعداد بيئة Microsoft 365 المؤسسية" data-en="Microsoft 365 Enterprise Tenant Setup">إعداد بيئة Microsoft 365 المؤسسية</div>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <div class="meta-row">
+                <div class="meta-label">Problem</div>
+                <div class="meta-value" data-ar="إدارة بيئة Microsoft 365 لمؤسسة متعددة الفروع مع تعقيدات Active Directory المحلية" data-en="Managing M365 for a multi-branch organization with complex on-premise AD integration needs.">إدارة بيئة Microsoft 365 لمؤسسة متعددة الفروع مع تعقيدات Active Directory المحلية</div>
+              </div>
+              <div class="meta-row">
+                <div class="meta-label">Solution</div>
+                <div class="meta-value" data-ar="إعداد شامل لـ M365 بما يشمل Exchange Online وTeams والسياسات الأمنية وتزامن AD" data-en="Comprehensive M365 setup including Exchange Online, Teams, security policies, and AD synchronization.">إعداد شامل لـ M365 بما يشمل Exchange Online وTeams والسياسات الأمنية وتزامن AD</div>
+              </div>
+            </div>
+            <div class="project-tools">
+              <span class="tag">Microsoft 365</span>
+              <span class="tag">Exchange Online</span>
+              <span class="tag">Azure AD</span>
+              <span class="tag">Intune</span>
+            </div>
+            <div class="project-result">✅ <span data-ar="نشر ناجح لمئات المستخدمين مع صفر اضطرابات في الخدمة" data-en="Successfully deployed for hundreds of users with zero service disruptions.">نشر ناجح لمئات المستخدمين مع صفر اضطرابات في الخدمة</span></div>
+          </div>
+        </div>
+        
+        <div class="project-card fade-in">
+          <div class="project-header">
+            <div class="project-tag">NOC Optimization</div>
+            <div class="project-title" data-ar="تحسين وحدة مراقبة NOC" data-en="NOC Monitoring System Optimization">تحسين وحدة مراقبة NOC</div>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <div class="meta-row">
+                <div class="meta-label">Problem</div>
+                <div class="meta-value" data-ar="ضوضاء عالية في التنبيهات وبطء في الاستجابة للحوادث في بيئة ISP متعددة العملاء" data-en="High alert noise and slow incident response times in a multi-client ISP environment.">ضوضاء عالية في التنبيهات وبطء في الاستجابة للحوادث في بيئة ISP متعددة العملاء</div>
+              </div>
+              <div class="meta-row">
+                <div class="meta-label">Solution</div>
+                <div class="meta-value" data-ar="ضبط عتبات التنبيه في Cacti، إنشاء dashboards مخصصة، توثيق إجراءات الاستجابة" data-en="Tuned Cacti alert thresholds, built custom dashboards, documented incident response procedures.">ضبط عتبات التنبيه في Cacti، إنشاء dashboards مخصصة، توثيق إجراءات الاستجابة</div>
+              </div>
+            </div>
+            <div class="project-tools">
+              <span class="tag">Cacti</span>
+              <span class="tag">SNMP</span>
+              <span class="tag">GLPI</span>
+              <span class="tag">RCA</span>
+            </div>
+            <div class="project-result">✅ <span data-ar="تحسين MTTR بنسبة 35% وتقليل التوقف الكلي للشبكة بنسبة 30%" data-en="35% MTTR improvement and 30% overall network downtime reduction.">تحسين MTTR بنسبة 35% وتقليل التوقف الكلي للشبكة بنسبة 30%</span></div>
+          </div>
+        </div>
+        
+        <div class="project-card fade-in">
+          <div class="project-header">
+            <div class="project-tag">CCTV</div>
+            <div class="project-title" data-ar="منظومة 340+ كاميرا مراقبة مركزية" data-en="340+ Camera Centralized Surveillance System">منظومة 340+ كاميرا مراقبة مركزية</div>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <div class="meta-row">
+                <div class="meta-label">Problem</div>
+                <div class="meta-value" data-ar="الحاجة لمنظومة مراقبة مركزية تغطي جميع فروع السلسلة التجارية" data-en="Need for a centralized surveillance system covering all retail chain branches.">الحاجة لمنظومة مراقبة مركزية تغطي جميع فروع السلسلة التجارية</div>
+              </div>
+              <div class="meta-row">
+                <div class="meta-label">Solution</div>
+                <div class="meta-value" data-ar="نشر 340+ كاميرا Hikvision IP مع NVR مركزي وإدارة موحدة عن بُعد" data-en="Deployed 340+ Hikvision IP cameras with centralized NVR and unified remote management.">نشر 340+ كاميرا Hikvision IP مع NVR مركزي وإدارة موحدة عن بُعد</div>
+              </div>
+            </div>
+            <div class="project-tools">
+              <span class="tag">Hikvision IP Cameras</span>
+              <span class="tag">NVR</span>
+              <span class="tag">PoE Switching</span>
+              <span class="tag">iVMS-4200</span>
+            </div>
+            <div class="project-result">✅ <span data-ar="توافر مستمر للمراقبة بنسبة 99%+ عبر جميع المواقع" data-en="99%+ continuous surveillance availability across all locations.">توافر مستمر للمراقبة بنسبة 99%+ عبر جميع المواقع</span></div>
+          </div>
+        </div>
+
+        <div class="project-card fade-in">
+          <div class="project-header">
+            <div class="project-tag">Computer Vision</div>
+            <div class="project-title" data-ar="تطبيق ويب للتعرف على الوجوه – CS50 Final Project" data-en="Facial Recognition Web App – CS50 Final Project">تطبيق ويب للتعرف على الوجوه – CS50 Final Project</div>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <div class="meta-row">
+                <div class="meta-label">Problem</div>
+                <div class="meta-value" data-ar="بناء مشروع تخرج CS50 وظيفي يجمع بين رؤية الحاسوب وتطوير الويب" data-en="Build a functional CS50 final project combining computer vision and web development.">بناء مشروع تخرج CS50 وظيفي يجمع بين رؤية الحاسوب وتطوير الويب</div>
+              </div>
+              <div class="meta-row">
+                <div class="meta-label">Solution</div>
+                <div class="meta-value" data-ar="تطوير تطبيق ويب للتعرف على الوجوه باستخدام Node.js وOpenCV" data-en="Developed a real-time facial recognition web app using Node.js and OpenCV.">تطوير تطبيق ويب للتعرف على الوجوه باستخدام Node.js وOpenCV</div>
+              </div>
+            </div>
+            <div class="project-tools">
+              <span class="tag">Node.js</span>
+              <span class="tag">OpenCV</span>
+              <span class="tag">Python</span>
+              <span class="tag">JavaScript</span>
+            </div>
+            <div class="project-result">✅ <span data-ar="مشروع تخرج ناجح في CS50 بجامعة هارفارد – 2020" data-en="Successful CS50 Harvard final project submission – 2020.">مشروع تخرج ناجح في CS50 بجامعة هارفارد – 2020</span></div>
+          </div>
+        </div>
+
+        <div class="project-card fade-in">
+          <div class="project-header">
+            <div class="project-tag">Mobile App</div>
+            <div class="project-title" data-ar="تطبيق COVID-19 للأندرويد" data-en="COVID-19 Android Tracker App">تطبيق COVID-19 للأندرويد</div>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <div class="meta-row">
+                <div class="meta-label">Problem</div>
+                <div class="meta-value" data-ar="توفير أداة سهلة الاستخدام لمتابعة إحصائيات وباء COVID-19" data-en="Provide an easy-to-use tool for tracking COVID-19 pandemic statistics.">توفير أداة سهلة الاستخدام لمتابعة إحصائيات وباء COVID-19</div>
+              </div>
+              <div class="meta-row">
+                <div class="meta-label">Solution</div>
+                <div class="meta-value" data-ar="بناء تطبيق أندرويد لمتابعة COVID-19 باستخدام Ionic 5 وAngular 9" data-en="Built a COVID-19 Android tracker app using Ionic 5 and Angular 9 with live API data.">بناء تطبيق أندرويد لمتابعة COVID-19 باستخدام Ionic 5 وAngular 9</div>
+              </div>
+            </div>
+            <div class="project-tools">
+              <span class="tag">Ionic 5</span>
+              <span class="tag">Angular 9</span>
+              <span class="tag">Android</span>
+              <span class="tag">REST API</span>
+            </div>
+            <div class="project-result">✅ <span data-ar="تطبيق أندرويد مكتمل مع بيانات حية من APIs عامة" data-en="Fully functional Android app with live data from public COVID-19 APIs.">تطبيق أندرويد مكتمل مع بيانات حية من APIs عامة</span></div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p data-ar="محمد فاروق حسن سليمان — مهندس دعم تقني | جدة، المملكة العربية السعودية" data-en="Mohamed Faroug Hassan Soliman — L2/L3 Network Engineer | Jeddah, Saudi Arabia">محمد فاروق حسن سليمان — مهندس دعم تقني | جدة، المملكة العربية السعودية</p>
+  </footer>
+</div>
+
+
+<!-- ================== BLOG PAGE ================== -->
+<div class="page" id="page-blog">
+  
+  <section>
+    <div class="container">
+      <div class="section-tag" data-ar="المدونة التقنية" data-en="Tech Blog">المدونة التقنية</div>
+      <h2 class="section-title" data-ar="المقالات والتدوينات" data-en="Articles & Posts">المقالات والتدوينات</h2>
+      <p class="section-desc" data-ar="أشارك هنا خبراتي ومقالات تقنية عن الشبكات والبنية التحتية والأنظمة" data-en="I share my experiences and technical articles about networking, infrastructure, and systems.">أشارك هنا خبراتي ومقالات تقنية عن الشبكات والبنية التحتية والأنظمة</p>
+
+      <div style="display:flex; justify-content:flex-end; margin-bottom:2rem;">
+        <button class="btn-primary" onclick="showBlogEditor()" id="newPostBtn">
+          ✏️ <span data-ar="كتابة مقال جديد" data-en="Write New Post">كتابة مقال جديد</span>
+        </button>
+      </div>
+
+      <!-- Blog Editor (hidden by default) -->
+      <div id="blogEditor" style="display:none; margin-bottom:3rem;">
+        <div class="contact-form">
+          <div class="form-title" data-ar="مقال جديد" data-en="New Post">مقال جديد</div>
+          <div class="form-group">
+            <label data-ar="عنوان المقال" data-en="Post Title">عنوان المقال</label>
+            <input type="text" id="postTitle" placeholder="عنوان المقال...">
+          </div>
+          <div class="form-group">
+            <label data-ar="التصنيف" data-en="Category">التصنيف</label>
+            <select id="postCategory">
+              <option value="Networking" data-ar="الشبكات" data-en="Networking">الشبكات</option>
+              <option value="Security" data-ar="الأمن السيبراني" data-en="Security">الأمن السيبراني</option>
+              <option value="Systems" data-ar="الأنظمة" data-en="Systems">الأنظمة</option>
+              <option value="Cloud" data-ar="الحوسبة السحابية" data-en="Cloud">الحوسبة السحابية</option>
+              <option value="Projects" data-ar="المشاريع" data-en="Projects">المشاريع</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label data-ar="محتوى المقال" data-en="Content">محتوى المقال</label>
+            <textarea id="postContent" style="min-height:200px;" placeholder="اكتب مقالتك هنا..."></textarea>
+          </div>
+          <div style="display:flex; gap:1rem;">
+            <button class="btn-primary" onclick="savePost()">
+              💾 <span data-ar="نشر المقال" data-en="Publish Post">نشر المقال</span>
+            </button>
+            <button class="btn-outline" onclick="cancelPost()">
+              <span data-ar="إلغاء" data-en="Cancel">إلغاء</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blog Posts Grid -->
+      <div id="blogPostsGrid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:2rem;">
+        <!-- Sample starter post -->
+        <div class="project-card fade-in" style="cursor:pointer;" onclick="openPost(0)">
+          <div class="project-header">
+            <div class="project-tag">Networking</div>
+            <div class="project-title">How I Deployed SD-WAN Across 25 Branches</div>
+          </div>
+          <div class="project-body">
+            <div style="color:var(--text-muted); font-size:0.875rem; line-height:1.7;">
+              In this article I walk through the architecture decisions, challenges, and results of deploying Sophos XGS 2300 and SD-RED across a retail chain with 25+ branches...
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:1rem;">
+              <span class="tag">March 2026</span>
+              <span style="color:var(--blue-light); font-size:0.8rem;" data-ar="اقرأ المزيد ←" data-en="Read More →">Read More →</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card fade-in" style="cursor:pointer;" onclick="openPost(1)">
+          <div class="project-header">
+            <div class="project-tag">Security</div>
+            <div class="project-title">VPN Best Practices with Sophos XG</div>
+          </div>
+          <div class="project-body">
+            <div style="color:var(--text-muted); font-size:0.875rem; line-height:1.7;">
+              Configuring site-to-site IPsec VPN and SSL VPN for remote workers using Sophos XG firewall — tips, pitfalls, and lessons learned from real deployments...
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:1rem;">
+              <span class="tag">February 2026</span>
+              <span style="color:var(--blue-light); font-size:0.8rem;" data-ar="اقرأ المزيد ←" data-en="Read More →">Read More →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post Modal -->
+      <div id="postModal" style="display:none; position:fixed; inset:0; z-index:2000; background:rgba(0,0,0,0.7); backdrop-filter:blur(8px); overflow-y:auto;">
+        <div style="max-width:760px; margin:5rem auto 2rem; background:var(--navy2); border:1px solid var(--border); border-radius:20px; padding:3rem; position:relative;">
+          <button onclick="closePost()" style="position:absolute; top:1.5rem; right:1.5rem; background:transparent; border:1px solid var(--border); color:var(--text-muted); width:36px; height:36px; border-radius:8px; cursor:pointer; font-size:1.1rem;">✕</button>
+          <div id="postModalTag" class="project-tag" style="margin-bottom:1rem;"></div>
+          <h2 id="postModalTitle" style="font-size:1.8rem; font-weight:900; color:var(--white); margin-bottom:0.5rem;"></h2>
+          <div id="postModalDate" style="color:var(--text-muted); font-size:0.8rem; margin-bottom:2rem;"></div>
+          <div id="postModalContent" style="color:var(--text-main); line-height:1.9; font-size:0.95rem;"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 <span>Mohamed Faroug Hassan Soliman</span> — <span data-ar="جميع الحقوق محفوظة" data-en="All Rights Reserved">جميع الحقوق محفوظة</span></p>
+  </footer>
+</div>
+
+
+<!-- ================== CONTACT PAGE ================== -->
+<div class="page" id="page-contact">
+  
+  <section>
+    <div class="container">
+      <div class="section-tag" data-ar="تواصل معي" data-en="Get In Touch">تواصل معي</div>
+      <h2 class="section-title" data-ar="نتحدث؟" data-en="Let's Connect">نتحدث؟</h2>
+      <p class="section-desc" data-ar="متاح لفرص العمل الجديدة في جدة والرياض، عن بُعد أو هجين. لا تتردد في التواصل." data-en="Available for new opportunities in Jeddah and Riyadh, remote or hybrid. Don't hesitate to reach out.">متاح لفرص العمل الجديدة في جدة والرياض، عن بُعد أو هجين. لا تتردد في التواصل.</p>
+      
+      <div class="contact-grid">
+        <div class="contact-info">
+          <a href="tel:+966548239346" class="contact-item">
+            <div class="contact-icon ci-ph social-icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            </div>
+            <div>
+              <div class="contact-label" data-ar="الجوال" data-en="Phone">الجوال</div>
+              <div class="contact-val">+966 548 239 346</div>
+            </div>
+          </a>
+          
+          <a href="mailto:mohamedfaroughassan@gmail.com" class="contact-item">
+            <div class="contact-icon ci-em social-icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </div>
+            <div>
+              <div class="contact-label" data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</div>
+              <div class="contact-val">mohamedfaroughassan@gmail.com</div>
+            </div>
+          </a>
+
+          <a href="https://wa.me/966548239346" target="_blank" class="contact-item">
+            <div class="contact-icon ci-wa social-icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </div>
+            <div>
+              <div class="contact-label" data-ar="واتساب" data-en="WhatsApp">واتساب</div>
+              <div class="contact-val">wa.me/966548239346</div>
+            </div>
+          </a>
+          
+          <a href="https://linkedin.com/in/mohamed-faroug" target="_blank" class="contact-item">
+            <div class="contact-icon ci-li social-icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </div>
+            <div>
+              <div class="contact-label" data-ar="لينكدإن" data-en="LinkedIn">لينكدإن</div>
+              <div class="contact-val">linkedin.com/in/mohamed-faroug</div>
+            </div>
+          </a>
+
+          <a href="https://github.com/Mohamed-Faroug" target="_blank" class="contact-item">
+            <div class="contact-icon ci-gh social-icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            </div>
+            <div>
+              <div class="contact-label" data-ar="جيت هاب" data-en="GitHub">GitHub</div>
+              <div class="contact-val">github.com/Mohamed-Faroug</div>
+            </div>
+          </a>
+
+          <a href="https://www.youtube.com/@Mohamed-Faroug" target="_blank" class="contact-item">
+            <div class="contact-icon ci-yt social-icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+            </div>
+            <div>
+              <div class="contact-label" data-ar="يوتيوب" data-en="YouTube">يوتيوب</div>
+              <div class="contact-val">youtube.com/@Mohamed-Faroug</div>
+            </div>
+          </a>
+
+          <a href="https://twitter.com/MohamedFroug" target="_blank" class="contact-item">
+            <div class="contact-icon ci-tw social-icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </div>
+            <div>
+              <div class="contact-label" data-ar="تويتر / X" data-en="Twitter / X">تويتر / X</div>
+              <div class="contact-val">twitter.com/MohamedFroug</div>
+            </div>
+          </a>
+
+          <a href="https://facebook.com/Mohamed.Froug" target="_blank" class="contact-item">
+            <div class="contact-icon ci-fb social-icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </div>
+            <div>
+              <div class="contact-label" data-ar="فيسبوك" data-en="Facebook">فيسبوك</div>
+              <div class="contact-val">facebook.com/Mohamed.Froug</div>
+            </div>
+          </a>
+          
+          <div class="contact-item">
+            <div class="contact-icon ci-loc social-icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            </div>
+            <div>
+              <div class="contact-label" data-ar="الموقع" data-en="Location">الموقع</div>
+              <div class="contact-val" data-ar="جدة، المملكة العربية السعودية | مستعد للرياض (هجين)" data-en="Jeddah, Saudi Arabia | Riyadh Ready (Hybrid)">جدة، المملكة العربية السعودية | مستعد للرياض (هجين)</div>
+            </div>
+          </div>
+          
+          <a href="MOHAMED_FAROUG_L2_Support_Engineer_CV__1_.pdf" download class="btn-primary" style="justify-content:center;">
+            ⬇️ <span data-ar="تحميل السيرة الذاتية (PDF)" data-en="Download CV (PDF)">تحميل السيرة الذاتية (PDF)</span>
+          </a>
+        </div>
+        
+        <div class="contact-form">
+          <div class="form-title" data-ar="أرسل رسالة" data-en="Send a Message">أرسل رسالة</div>
+          <div class="form-subtitle" data-ar="سيتم الرد خلال 24 ساعة" data-en="I'll respond within 24 hours.">سيتم الرد خلال 24 ساعة</div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label data-ar="الاسم" data-en="Name">الاسم</label>
+              <input type="text" placeholder="اسمك الكريم">
+            </div>
+            <div class="form-group">
+              <label data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label>
+              <input type="email" placeholder="your@email.com" dir="ltr">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label data-ar="الشركة / المؤسسة" data-en="Company / Organization">الشركة / المؤسسة</label>
+            <input type="text" placeholder="اسم الشركة (اختياري)">
+          </div>
+          
+          <div class="form-group">
+            <label data-ar="موضوع الرسالة" data-en="Subject">موضوع الرسالة</label>
+            <select>
+              <option data-ar="فرصة عمل" data-en="Job Opportunity">فرصة عمل</option>
+              <option data-ar="استشارة تقنية" data-en="Technical Consultation">استشارة تقنية</option>
+              <option data-ar="مشروع تعاوني" data-en="Collaboration Project">مشروع تعاوني</option>
+              <option data-ar="أخرى" data-en="Other">أخرى</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label data-ar="الرسالة" data-en="Message">الرسالة</label>
+            <textarea placeholder="اكتب رسالتك هنا..."></textarea>
+          </div>
+          
+          <button class="btn-primary" style="width:100%; justify-content:center;" onclick="submitForm(this)">
+            <span data-ar="إرسال الرسالة" data-en="Send Message">إرسال الرسالة</span> →
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 <span>Mohamed Faroug Hassan Soliman</span> — <span data-ar="جميع الحقوق محفوظة" data-en="All Rights Reserved">جميع الحقوق محفوظة</span></p>
+  </footer>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+let isArabic = true;
+let isLight = false;
+
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + pageId).classList.add('active');
+  
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('onclick') && a.getAttribute('onclick').includes(pageId)) {
+      a.classList.add('active');
+    }
+  });
+  
+  // Close mobile menu
+  document.getElementById('navLinks').classList.remove('open');
+  
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  
+  // Animate skill bars if about page
+  if (pageId === 'about') {
+    setTimeout(() => {
+      document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+        const w = bar.style.width;
+        bar.style.width = '0';
+        setTimeout(() => { bar.style.width = w; }, 100);
+      });
+    }, 200);
+  }
+  
+  return false;
+}
+
+function toggleLang() {
+  isArabic = !isArabic;
+  const html = document.documentElement;
+  const body = document.body;
+  const btn = document.getElementById('langBtn');
+  
+  if (isArabic) {
+    html.setAttribute('lang', 'ar');
+    html.setAttribute('dir', 'rtl');
+    body.classList.remove('ltr');
+    btn.textContent = 'EN';
+  } else {
+    html.setAttribute('lang', 'en');
+    html.setAttribute('dir', 'ltr');
+    body.classList.add('ltr');
+    btn.textContent = 'ع';
+  }
+  
+  document.querySelectorAll('[data-ar]').forEach(el => {
+    if (isArabic) {
+      el.textContent = el.getAttribute('data-ar');
+    } else {
+      el.textContent = el.getAttribute('data-en');
+    }
+  });
+  
+  // Update placeholders
+  const inputs = document.querySelectorAll('input[placeholder], textarea[placeholder]');
+  if (!isArabic) {
+    inputs[0] && (inputs[0].placeholder = 'Your Name');
+    inputs[1] && (inputs[1].placeholder = 'your@email.com');
+    inputs[2] && (inputs[2].placeholder = 'Company (optional)');
+    if (document.querySelector('textarea')) document.querySelector('textarea').placeholder = 'Your message here...';
+  } else {
+    inputs[0] && (inputs[0].placeholder = 'اسمك الكريم');
+    inputs[1] && (inputs[1].placeholder = 'your@email.com');
+    inputs[2] && (inputs[2].placeholder = 'اسم الشركة (اختياري)');
+    if (document.querySelector('textarea')) document.querySelector('textarea').placeholder = 'اكتب رسالتك هنا...';
+  }
+}
+
+function toggleTheme() {
+  isLight = !isLight;
+  document.body.classList.toggle('light', isLight);
+  document.querySelector('.theme-toggle').textContent = isLight ? '🌙' : '☀️';
+}
+
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+function submitForm(btn) {
+  const originalText = btn.innerHTML;
+  btn.innerHTML = isArabic ? '✅ تم الإرسال بنجاح!' : '✅ Message Sent!';
+  btn.style.background = 'var(--green)';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.innerHTML = originalText;
+    btn.style.background = '';
+    btn.disabled = false;
+  }, 3000);
+}
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+  const nav = document.querySelector('nav');
+  if (!nav.contains(e.target)) {
+    document.getElementById('navLinks').classList.remove('open');
+  }
+});
+
+// Counter animation for achievement numbers
+function animateCounters() {
+  document.querySelectorAll('.achievement-num, .stat-num').forEach(el => {
+    const target = el.textContent.replace(/[^0-9.]/g, '');
+    if (!target) return;
+    const suffix = el.textContent.replace(target, '');
+    const num = parseFloat(target);
+    let start = 0;
+    const duration = 1500;
+    const step = num / (duration / 16);
+    
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= num) {
+        el.textContent = el.textContent.includes('.') ? num.toFixed(1) + suffix : Math.round(num) + suffix;
+        clearInterval(timer);
+      } else {
+        el.textContent = num.toString().includes('.') ? start.toFixed(1) + suffix : Math.round(start) + suffix;
+      }
+    }, 16);
+  });
+}
+
+// ===== BLOG SYSTEM =====
+const samplePosts = [
+  {
+    title: "How I Deployed SD-WAN Across 25 Branches",
+    category: "Networking",
+    date: "March 2026",
+    content: `Deploying a reliable SD-WAN solution for a retail chain with 25+ branches was one of the most rewarding projects in my career. In this article, I'll walk you through the architecture decisions, the challenges we faced, and the results we achieved.\n\n**The Challenge**\nEach branch needed reliable connectivity for POS systems, delivery platforms, and staff communication. Traditional MPLS was too expensive and inflexible.\n\n**The Solution**\nWe deployed Sophos XGS 2300 at the headquarters and SD-RED 20 appliances at each branch. This gave us zero-touch deployment, automatic failover, and centralized management.\n\n**Results**\n- 99.5%+ uptime across all branches\n- Significant cost reduction vs. MPLS\n- Centralized monitoring and policy management\n- Rapid deployment for new branches\n\nThe key lesson: plan your IP addressing scheme carefully before deployment — it saves massive headaches later.`
+  },
+  {
+    title: "VPN Best Practices with Sophos XG",
+    category: "Security",
+    date: "February 2026",
+    content: `After configuring VPN for dozens of deployments, here are the most important lessons I've learned when working with Sophos XG firewalls.\n\n**Site-to-Site IPsec VPN**\nAlways use IKEv2 when possible. It's faster, more secure, and handles NAT traversal better than IKEv1. Use strong encryption (AES-256) and SHA-256 or better for hashing.\n\n**SSL VPN for Remote Workers**\nSophos SSL VPN is user-friendly and works well on all platforms. Key tips:\n- Split tunneling: only route company traffic through VPN\n- Enable MFA — this is non-negotiable\n- Set appropriate session timeouts\n\n**Common Pitfalls**\n- MTU mismatches causing slow transfers — always test with large file transfers\n- Forgetting to open firewall rules for VPN traffic\n- Not documenting PSK and certificates properly\n\nWith these practices in place, you'll have a stable, secure VPN infrastructure.`
+  }
+];
+
+let blogPosts = [...samplePosts];
+
+function showBlogEditor() {
+  document.getElementById('blogEditor').style.display = 'block';
+  document.getElementById('newPostBtn').style.display = 'none';
+  document.getElementById('blogEditor').scrollIntoView({ behavior: 'smooth' });
+}
+
+function cancelPost() {
+  document.getElementById('blogEditor').style.display = 'none';
+  document.getElementById('newPostBtn').style.display = 'inline-flex';
+  document.getElementById('postTitle').value = '';
+  document.getElementById('postContent').value = '';
+}
+
+function savePost() {
+  const title = document.getElementById('postTitle').value.trim();
+  const content = document.getElementById('postContent').value.trim();
+  const category = document.getElementById('postCategory').value;
+  
+  if (!title || !content) {
+    alert(isArabic ? 'يرجى ملء العنوان والمحتوى' : 'Please fill in the title and content.');
+    return;
+  }
+  
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  
+  blogPosts.unshift({ title, category, date: dateStr, content });
+  renderBlogPosts();
+  cancelPost();
+}
+
+function renderBlogPosts() {
+  const grid = document.getElementById('blogPostsGrid');
+  grid.innerHTML = blogPosts.map((p, i) => `
+    <div class="project-card fade-in" style="cursor:pointer;" onclick="openPost(${i})">
+      <div class="project-header">
+        <div class="project-tag">${p.category}</div>
+        <div class="project-title">${p.title}</div>
+      </div>
+      <div class="project-body">
+        <div style="color:var(--text-muted); font-size:0.875rem; line-height:1.7;">
+          ${p.content.substring(0, 140).replace(/\*\*/g,'')}...
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:1rem;">
+          <span class="tag">${p.date}</span>
+          <span style="color:var(--blue-light); font-size:0.8rem;">${isArabic ? 'اقرأ المزيد ←' : 'Read More →'}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openPost(i) {
+  const p = blogPosts[i];
+  document.getElementById('postModalTag').textContent = p.category;
+  document.getElementById('postModalTitle').textContent = p.title;
+  document.getElementById('postModalDate').textContent = p.date;
+  document.getElementById('postModalContent').innerHTML = p.content
+    .replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--white)">$1</strong>')
+    .replace(/\n/g, '<br>');
+  document.getElementById('postModal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closePost() {
+  document.getElementById('postModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+// Close modal on background click
+document.addEventListener('click', (e) => {
+  const modal = document.getElementById('postModal');
+  if (modal && e.target === modal) closePost();
+});
+
+// Counter animation for achievement numbers
+function animateCounters() {
+  document.querySelectorAll('.achievement-num, .stat-num').forEach(el => {
+    const target = el.textContent.replace(/[^0-9.]/g, '');
+    if (!target) return;
+    const suffix = el.textContent.replace(target, '');
+    const num = parseFloat(target);
+    let start = 0;
+    const duration = 1500;
+    const step = num / (duration / 16);
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= num) {
+        el.textContent = el.textContent.includes('.') ? num.toFixed(1) + suffix : Math.round(num) + suffix;
+        clearInterval(timer);
+      } else {
+        el.textContent = num.toString().includes('.') ? start.toFixed(1) + suffix : Math.round(start) + suffix;
+      }
+    }, 16);
+  });
+}
+
+setTimeout(animateCounters, 500);
+</script>
+</body>
+</html>
